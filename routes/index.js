@@ -71,20 +71,29 @@ router.post('/result', function (req, res, next) {
         }
       });
 
+      const totalBadges = skillBadgeCount + regularBadgeCount
+
       // Determine the reward based on the number of badges earned
-      let rewardMessage = '';
-      if (skillBadgeCount >= 3 && regularBadgeCount >= 7) {
-        rewardMessage = "Quà tặng vô cùng hấp dẫn và có giới hạn: Gối tựa, ly nước và Áo khoác gió";
-      } else if (skillBadgeCount >= 3 && regularBadgeCount >= 14) {
-        rewardMessage = "Quà tặng vô cùng hấp dẫn và có giới hạn: Gối tựa, ly nước, và Áo khoác gió";
-      } else if (skillBadgeCount >= 3) {
-        rewardMessage = "Bạn đã hoàn thành ít nhất 3 skill badges. Hãy tiếp tục hoàn thành thêm regular badges để nhận quà tặng!";
-      } else {
-        rewardMessage = "Bạn cần hoàn thành ít nhất 3 skill badges và 7 regular badges để nhận quà tặng!";
+      let rewardMessage = "Bạn cần hoàn thành ít nhất 3 skill badges và 7 regular badges để nhận quà tặng!";
+
+      if (skillBadgeCount >= 3 && totalBadges >= 7) {
+        rewardMessage = "Bạn đã được quà Tier 1: Gối tựa, ly nước và Áo khoác gió";
+      }
+
+      if (skillBadgeCount >= 6 && totalBadges >= 14) {
+        rewardMessage = "Bạn đã được quà Tier 2: Gối tựa, ly nước, và Áo khoác gió";
+      }
+
+      if (skillBadgeCount >= 3) {
+        rewardMessage = `Bạn đã có ít nhất 3 skill badges. Hãy tiếp tục kiếm thêm regular badges để nhận quà tặng!`;
+      }
+
+      if (skillBadgeCount >= 6) {
+        rewardMessage = "Bạn đã có ít nhất 6 skill badges. Hãy tiếp tục kiếm thêm regular badges để nhận quà tặng!";
       }
 
       // Send the reward message as response
-      res.send(rewardMessage);
+      res.render('result', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges });
     } else {
       res.send('Đã có lỗi xảy ra khi đọc HTML từ URL.');
     }

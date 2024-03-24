@@ -6,20 +6,19 @@ html
     meta(charset="utf-8")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css")
-    // CSS để căn giữa nội dung
-    style
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
   body
     // Sử dụng lớp container của Bootstrap để căn giữa nội dung
     .container
       h1.text-center Result
-      // In ra nội dung HTML lấy được từ URL
-      //- Sử dụng !{...} để render nội dung HTML thay vì hiển thị là text
-      div!= htmlContent
+      // Hiển thị số lượng badge hiện tại và số lượng badge cần thiết để hoàn thành Tier 1 và Tier 2
+      div.text-center
+        p Bạn đang có 
+          span.badge.badge-primary= totalBadges
+          |  badges, trong đó 
+          span.badge.badge-success= skillBadgeCount
+          |  skill badges và 
+          span.badge.badge-warning= regularBadgeCount
+          |  regular badges
+      div.text-center.text-danger(style="font-size: 20px; margin: 10px 0;")= rewardMessage
       // Hiển thị hình ảnh
       img(src="https://services.google.com/fh/files/events/csj_vn_s6_swags_rsvp.png" class="img-responsive center-block" alt="Hình ảnh")
