@@ -45,8 +45,20 @@ router.get('/', function (req, res, next) {
 
 /* Return result */
 router.post('/result', function (req, res, next) {
-
   const url = req.body.url;
+
+  // Phân tích URL để trích xuất id
+  const uuid = url.split('/').pop();
+
+  // Chuyển hướng đến /result/<uuid>
+  res.redirect('/r/' + uuid);
+});
+
+/* Return result */
+router.get('/r/:id', function (req, res, next) {
+
+  const id = req.params.id;
+  const url = `https://www.cloudskillsboost.google/public_profiles/${id}`;
 
   request(url, (error, response, html) => {
     if (!error && response.statusCode == 200) {
