@@ -74,14 +74,26 @@ router.get('/r/:id', function (req, res, next) {
       $('.profile-badge').each((index, badge) => {
         // Extract badge title text
         const badgeTitle = $(badge).find('.ql-title-medium').text().trim();
-
-        // Compare badge title with skill badges list
-        if (skillBadges.includes(badgeTitle)) {
-          skillBadgeCount++;
-        }
-        // Compare badge title with regular badges list
-        else if (regularBadges.includes(badgeTitle)) {
-          regularBadgeCount++;
+        // Extract badge date
+        const badgeDateText = $(badge).find('.ql-body-medium').text().trim();
+        // Extract date from text
+        const badgeDateMatch = badgeDateText.match(/(\w{3})\s(\d{1,2}),\s(\d{4})/);
+        if (badgeDateMatch) {
+          // Convert date components to Date object
+          const badgeDate = new Date(`${badgeDateMatch[3]}-${badgeDateMatch[2]}-${badgeDateMatch[1]}`);
+          // Check if date is within the valid range
+          const startDate = new Date('2024-03-22');
+          const endDate = new Date('2024-04-20');
+          if (badgeDate >= startDate && badgeDate <= endDate) {
+            // Compare badge title with skill badges list
+            if (skillBadges.includes(badgeTitle)) {
+              skillBadgeCount++;
+            }
+            // Compare badge title with regular badges list
+            else if (regularBadges.includes(badgeTitle)) {
+              regularBadgeCount++;
+            }
+          }
         }
       });
 
@@ -112,8 +124,6 @@ router.get('/r/:id', function (req, res, next) {
       res.send('Đã có lỗi xảy ra khi đọc HTML từ URL.');
     }
   });
-
-
 });
 
 module.exports = router;
