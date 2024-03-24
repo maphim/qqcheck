@@ -5,7 +5,7 @@ FROM node:14
 WORKDIR /usr/src/app
 
 # Sao chép tất cả các file trong thư mục hiện tại vào thư mục làm việc
-COPY . .
+COPY . /usr/src/app
 
 # Cài đặt các dependencies
 RUN npm install
