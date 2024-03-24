@@ -80,7 +80,8 @@ router.get('/r/:id', function (req, res, next) {
         const badgeDateMatch = badgeDateText.match(/(\w{3})\s(\d{1,2}),\s(\d{4})/);
         if (badgeDateMatch) {
           // Convert date components to Date object
-          const badgeDate = new Date(`${badgeDateMatch[3]}-${badgeDateMatch[2]}-${badgeDateMatch[1]}`);
+          const badgeDate = new Date(`${badgeDateMatch[3]}-${badgeDateMatch[2]}-${badgeDateMatch[1]}T00:00:00-0400`);
+          console.log(badgeDate, badgeTitle)
           // Check if date is within the valid range
           const startDate = new Date('2024-03-22');
           const endDate = new Date('2024-04-20');
