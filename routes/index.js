@@ -56,6 +56,8 @@ router.post('/result', function (req, res, next) {
       let skillBadgeCount = 0;
       let regularBadgeCount = 0;
 
+      let profileName = $('.ql-display-small').text().trim();
+
       // Iterate through each profile badge
       $('.profile-badge').each((index, badge) => {
         // Extract badge title text
@@ -93,7 +95,7 @@ router.post('/result', function (req, res, next) {
       }
 
       // Send the reward message as response
-      res.render('result', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges });
+      res.render('result', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileName });
     } else {
       res.send('Đã có lỗi xảy ra khi đọc HTML từ URL.');
     }
