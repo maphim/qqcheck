@@ -7,9 +7,10 @@ html
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css")
   body
     .container.text-center
-      h1 Your profile is public (https://www.cloudskillsboost.google/public_profiles/<uuid>)
+      h1 Your profile is public 
+        small (https://www.cloudskillsboost.google/public_profiles/<uuid>)
       form(action="/result", method="post" class="form-inline")
         .form-group
-          label(for="url") Insert URL here:
-          input(type="text", name="url", id="url" class="form-control")
-        button(type="submit" class="btn btn-primary") Submit
+          label(for="url" style="margin-right: 8px;") Insert URL here:
+          input(type="text", name="url", id="url" class="form-control" placeholder="Url is hint text" style="margin-right: 8px; width: 600px")
+        button(type="submit" class="btn btn-primary" style="margin-left: 8px;") Submit
