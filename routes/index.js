@@ -76,6 +76,9 @@ router.get('/r/:id', function (req, res, next) {
         const badgeTitle = $(badge).find('.ql-title-medium').text().trim();
         // Extract badge date
         const badgeDateText = $(badge).find('.ql-body-medium').text().trim();
+
+        
+
         // Extract date from text
         const badgeDateMatch = badgeDateText.match(/(\w{3})\s(\d{1,2}),\s(\d{4})/);
         if (badgeDateMatch) {
@@ -118,6 +121,8 @@ router.get('/r/:id', function (req, res, next) {
       if (skillBadgeCount >= 6) {
         rewardMessage = "Bạn đã có ít nhất 6 skill badges. Hãy tiếp tục kiếm thêm regular badges để nhận quà tặng!";
       }
+
+      console.log(`USER: ${profileName}, ID: ${id}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
 
       // Send the reward message as response
       res.render('result', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileName });
