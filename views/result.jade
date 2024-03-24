@@ -1,9 +1,25 @@
 doctype html
 html
   head
-    title Kết quả
+    title Result
+    // Thêm định dạng cho trang và tệp CSS của Bootstrap 3
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css")
+    // CSS để căn giữa nội dung
+    style
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
   body
-    h1 Kết quả
-    // In ra nội dung HTML lấy được từ URL
-    //- Sử dụng !{...} để render nội dung HTML thay vì hiển thị là text
-    div!= htmlContent
+    // Sử dụng lớp container của Bootstrap để căn giữa nội dung
+    .container
+      h1.text-center Result
+      // In ra nội dung HTML lấy được từ URL
+      //- Sử dụng !{...} để render nội dung HTML thay vì hiển thị là text
+      div!= htmlContent
+      // Hiển thị hình ảnh
+      img(src="https://services.google.com/fh/files/events/csj_vn_s6_swags_rsvp.png" class="img-responsive center-block" alt="Hình ảnh")

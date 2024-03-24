@@ -1,10 +1,15 @@
 doctype html
 html
   head
-    title Đọc HTML từ URL
+    title Your profile is public
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css")
   body
-    h1 Đọc HTML từ URL
-    form(action="/result", method="post")
-      label(for="url") Nhập URL:
-      input(type="text", name="url", id="url")
-      button(type="submit") Submit
+    .container.text-center
+      h1 Your profile is public (https://www.cloudskillsboost.google/public_profiles/<uuid>)
+      form(action="/result", method="post" class="form-inline")
+        .form-group
+          label(for="url") Insert URL here:
+          input(type="text", name="url", id="url" class="form-control")
+        button(type="submit" class="btn btn-primary") Submit
