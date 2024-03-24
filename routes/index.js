@@ -117,10 +117,12 @@ router.get('/r/:id', function (req, res, next) {
 
       if (skillBadgeCount >= 3) {
         rewardMessage = `Bạn đã có ít nhất 3 skill badges. Hãy tiếp tục kiếm thêm regular badges để nhận quà tặng!`;
+        isCompleted = false;
       }
 
       if (skillBadgeCount >= 6) {
         rewardMessage = "Bạn đã có ít nhất 6 skill badges. Hãy tiếp tục kiếm thêm regular badges để nhận quà tặng!";
+        isCompleted = false;
       }
 
       console.log(`USER: ${profileName}, ID: ${id}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
