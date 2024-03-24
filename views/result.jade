@@ -20,6 +20,6 @@ html
           |  skill badges và 
           span.badge.badge-warning= regularBadgeCount
           |  regular badges
-      div.text-center.text-danger(style="font-size: 20px; margin: 10px 0;")= rewardMessage
+      div.text-center(style="font-size: 20px; margin: 10px 0;", class=isCompleted ? "text-success" : "text-danger")= rewardMessage
       // Hiển thị hình ảnh
       img(src="https://services.google.com/fh/files/events/csj_vn_s6_swags_rsvp.png" class="img-responsive center-block" alt="Hình ảnh")

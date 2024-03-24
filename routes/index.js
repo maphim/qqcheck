@@ -77,8 +77,6 @@ router.get('/r/:id', function (req, res, next) {
         // Extract badge date
         const badgeDateText = $(badge).find('.ql-body-medium').text().trim();
 
-        
-
         // Extract date from text
         const badgeDateMatch = badgeDateText.match(/(\w{3})\s(\d{1,2}),\s(\d{4})/);
         if (badgeDateMatch) {
@@ -104,13 +102,16 @@ router.get('/r/:id', function (req, res, next) {
 
       // Determine the reward based on the number of badges earned
       let rewardMessage = "Bạn cần hoàn thành ít nhất 3 skill badges và 7 regular badges để nhận quà tặng!";
+      let isCompleted = false;
 
       if (skillBadgeCount >= 3 && totalBadges >= 7) {
         rewardMessage = "Bạn đã được quà Tier 1: Gối tựa, ly nước và Áo khoác gió";
+        isCompleted = true;
       }
 
       if (skillBadgeCount >= 6 && totalBadges >= 14) {
         rewardMessage = "Bạn đã được quà Tier 2: Gối tựa, ly nước, và Áo khoác gió";
+        isCompleted = true;
       }
 
       if (skillBadgeCount >= 3) {
