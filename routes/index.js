@@ -106,12 +106,12 @@ router.get('/r/:id', function (req, res, next) {
       let isCompleted = false;
 
       if (skillBadgeCount >= 3 && totalBadges >= 7) {
-        rewardMessage = "Bạn đã được quà Tier 1: Gối tựa, ly nước và Áo khoác gió";
+        rewardMessage = "🎊 Bạn đã được quà Tier 1: Gối tựa, ly nước và Áo khoác gió";
         isCompleted = true;
       }
 
       if (skillBadgeCount >= 6 && totalBadges >= 14) {
-        rewardMessage = "Bạn đã được quà Tier 2: Gối tựa, ly nước, và Áo khoác gió";
+        rewardMessage = "🎉 Bạn đã được quà Tier 2: Gối tựa, ly nước, và Áo khoác gió";
         isCompleted = true;
       }
 
