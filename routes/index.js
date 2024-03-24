@@ -69,7 +69,7 @@ router.get('/r/:id', function (req, res, next) {
       let regularBadgeCount = 0;
 
       let profileName = $('.ql-display-small').text().trim();
-      let profileAvatar = $('.profile-avatar').find('img').attr('src');
+      let profileAvatar = $('ql-avatar.profile-avatar').attr('src');
 
       // Iterate through each profile badge
       $('.profile-badge').each((index, badge) => {
