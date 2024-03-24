@@ -1,17 +1,17 @@
-# Sử dụng image node phiên bản LTS
+# Sử dụng image Node.js phiên bản LTS
 FROM node:14
 
-# Tạo thư mục làm việc trong container
+# Thiết lập thư mục làm việc trong container
 WORKDIR /usr/src/app
 
-# Sao chép tất cả các file trong thư mục hiện tại vào thư mục làm việc
-COPY . /usr/src/app
+# Sao chép tất cả các tệp từ thư mục dự án vào thư mục làm việc trong container
+COPY . .
 
-# Cài đặt các dependencies
+# Cài đặt các phụ thuộc
 RUN npm install
 
-# Mở cổng 3000 cho ứng dụng Express.js
+# Mở cổng 3000 để kết nối với ứng dụng Express.js
 EXPOSE 3000
 
-# Khởi động ứng dụng
-CMD ["node", "index.js"]
+# Khởi động ứng dụng khi container được chạy
+CMD ["npm", "start"]
