@@ -69,6 +69,7 @@ router.get('/r/:id', function (req, res, next) {
       let regularBadgeCount = 0;
 
       let profileName = $('.ql-display-small').text().trim();
+      let profileAvatar = $('.profile-avatar').find('img').attr('src');
 
       // Iterate through each profile badge
       $('.profile-badge').each((index, badge) => {
@@ -125,7 +126,7 @@ router.get('/r/:id', function (req, res, next) {
       console.log(`USER: ${profileName}, ID: ${id}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
 
       // Send the reward message as response
-      res.render('result', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileName });
+      res.render('result', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileName, profileAvatar, isCompleted });
     } else {
       res.send('Đã có lỗi xảy ra khi đọc HTML từ URL.');
     }

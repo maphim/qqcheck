@@ -2,7 +2,10 @@ doctype html
 html
   head
     title= profileName + " - " + rewardMessage
-    meta(name="description", content= profileName + " - " + rewardMessage)
+    meta(name="og:type", content= "website")
+    meta(name="og:title", content= profileName)
+    meta(name="og:description", content= profileName + " - " + rewardMessage)
+    meta(name="og:image", content= profileAvatar)
     // Thêm định dạng cho trang và tệp CSS của Bootstrap 3
     meta(charset="utf-8")
     meta(name="viewport", content="width=device-width, initial-scale=1")
