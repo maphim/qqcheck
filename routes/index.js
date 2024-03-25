@@ -72,7 +72,7 @@ router.get('/r/:id', function (req, res, next) {
       let profileAvatar = $('ql-avatar.profile-avatar').attr('src');
 
       if (!profileName) {
-        res.redirect('/404');
+        res.redirect('/'); // Redirect to homepage
       }
 
       // Iterate through each profile badge
