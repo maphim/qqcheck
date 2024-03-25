@@ -40,7 +40,7 @@ const regularBadges = [
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'QuanQuanGSP Checker' });
 });
 
 /* Return result */
@@ -72,7 +72,7 @@ router.get('/r/:id', function (req, res, next) {
       let profileAvatar = $('ql-avatar.profile-avatar').attr('src');
 
       if (!profileName) {
-        res.redirect('/'); // Redirect to homepage
+        return res.redirect('/'); // Redirect to homepage
       }
 
       // Iterate through each profile badge
