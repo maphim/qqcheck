@@ -71,6 +71,10 @@ router.get('/r/:id', function (req, res, next) {
       let profileName = $('.ql-display-small').text().trim();
       let profileAvatar = $('ql-avatar.profile-avatar').attr('src');
 
+      if (!profileName) {
+        res.redirect('/404');
+      }
+
       // Iterate through each profile badge
       $('.profile-badge').each((index, badge) => {
         // Extract badge title text
