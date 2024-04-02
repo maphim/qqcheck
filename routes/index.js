@@ -314,7 +314,7 @@ router.get('/r/:id/view', function (req, res, next) {
         const timeA = moment(a.time, "YYYY-MM-DDTHH:mm:ssZ");
         const timeB = moment(b.time, "YYYY-MM-DDTHH:mm:ssZ");
 
-        return timeB.diff(timeA);
+        return timeA.diff(timeB);
       })
 
       // Send the reward message as response
