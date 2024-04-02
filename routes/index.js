@@ -1,7 +1,16 @@
 var express = require('express');
 const cheerio = require('cheerio');
+const moment = require('moment');
 const request = require('request');
 var router = express.Router();
+
+moment.locale('vi');
+
+let app = {
+  title: '',
+  description: '',
+  image: ''
+}
 
 // Define lists of skill badges and regular badges
 const skillBadges = [
@@ -148,8 +157,14 @@ router.get('/r/:id', function (req, res, next) {
 
       console.log(`USER: ${profileName}, ID: ${id}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
 
+      app = {
+        title: profileName,
+        description: `${profileName} - ${rewardMessage}`,
+        image: profileAvatar
+      }
+
       // Send the reward message as response
-      res.render('result', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileId, profileName, profileAvatar, isCompleted, badgesWrong, badgesWrongTime });
+      res.render('result', { app, rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileId, profileName, profileAvatar, isCompleted, badgesWrong, badgesWrongTime });
     } else {
       res.send('Đã có lỗi xảy ra khi đọc HTML từ URL.');
     }
@@ -196,6 +211,8 @@ router.get('/r/:id/view', function (req, res, next) {
           badgesOfUser.push({
             title: badgeTitle,
             time: badgeDate,
+            timeStr: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").fromNow(),
+            timeHint: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").format('MM/DD/YYYY'),
             status: 'OK'
           });
 
@@ -268,8 +285,14 @@ router.get('/r/:id/view', function (req, res, next) {
 
       console.log(`USER: ${profileName}, ID: ${id}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
 
+      app = {
+        title: profileName,
+        description: `${profileName} | Danh sách khóa học`,
+        image: profileAvatar
+      }
+
       // Send the reward message as response
-      res.render('result-detail', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileId, profileName, profileAvatar, isCompleted, badgesOfUser });
+      res.render('result-detail', { app, rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileId, profileName, profileAvatar, isCompleted, badgesOfUser });
     } else {
       res.send('Đã có lỗi xảy ra khi đọc HTML từ URL.');
     }

@@ -1,31 +1,23 @@
 doctype html
 html
-  head
-    title= profileName + " - " + rewardMessage
-    meta(name="og:type", content= "website")
-    meta(name="og:title", content= profileName)
-    meta(name="og:description", content= profileName + " - " + rewardMessage)
-    meta(name="og:image", content= profileAvatar)
-    // Thêm định dạng cho trang và tệp CSS của Bootstrap 3
-    meta(charset="utf-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1")
-    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css")
-    link(rel="icon", href=profileAvatar)
+  include ./components/head.jade
   body
-    // Sử dụng lớp container của Bootstrap để căn giữa nội dung
+
     .container
-      h1.text-center= profileName
-      // Hiển thị số lượng badge hiện tại và số lượng badge cần thiết để hoàn thành Tier 1 và Tier 2
-      div.text-center
-        p Bạn đang có 
-          span.badge.badge-primary= totalBadges
-          |  badges, trong đó 
-          span.badge.badge-success= skillBadgeCount
-          |  skill badges và 
-          span.badge.badge-warning= regularBadgeCount
-          |  regular badges            
-          a(href="/r/" + profileId + "/view")
-            | (chi tiết)
-      div.text-center(style="font-size: 20px; margin: 10px 0;", class=isCompleted ? "text-success" : "text-danger")= rewardMessage
-      // Hiển thị hình ảnh
-      img(src="https://services.google.com/fh/files/events/csj_vn_s6_swags_rsvp.png" class="img-responsive center-block" alt="Hình ảnh")
+      header.p-3.font-sans.text-center
+        div.pt-md-3.pb-md-1
+          h1.bd-title.mt-0= profileName
+          p.bd-lead Bạn đang có 
+            span.badge.badge-dark= totalBadges
+            |  badges, trong đó 
+            span.badge.badge-dark= skillBadgeCount
+            |  skill badges và 
+            span.badge.badge-dark= regularBadgeCount
+            |  regular badges            
+            a(href="/r/" + profileId + "/view" title="Danh sách khóa học của " + profileName)
+              | (chi tiết)
+          p(style="font-size: 20px; margin: 10px 0;", class=isCompleted ? "text-success" : "text-danger")= rewardMessage
+
+      main.p-3
+        div.card
+          img(src="https://services.google.com/fh/files/events/csj_vn_s6_swags_rsvp.png" class="card-img" alt="Hình ảnh")
