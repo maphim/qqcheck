@@ -70,6 +70,7 @@ router.get('/r/:id', function (req, res, next) {
 
       let profileName = $('.ql-display-small').text().trim();
       let profileAvatar = $('ql-avatar.profile-avatar').attr('src');
+      let profileId = id;
 
       if (!profileName) {
         return res.redirect('/'); // Redirect to homepage
@@ -148,7 +149,7 @@ router.get('/r/:id', function (req, res, next) {
       console.log(`USER: ${profileName}, ID: ${id}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
 
       // Send the reward message as response
-      res.render('result', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileName, profileAvatar, isCompleted, badgesWrong, badgesWrongTime });
+      res.render('result', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileId, profileName, profileAvatar, isCompleted, badgesWrong, badgesWrongTime });
     } else {
       res.send('Đã có lỗi xảy ra khi đọc HTML từ URL.');
     }
@@ -171,6 +172,7 @@ router.get('/r/:id/view', function (req, res, next) {
 
       let profileName = $('.ql-display-small').text().trim();
       let profileAvatar = $('ql-avatar.profile-avatar').attr('src');
+      let profileId = id;
 
       if (!profileName) {
         return res.redirect('/'); // Redirect to homepage
@@ -267,7 +269,7 @@ router.get('/r/:id/view', function (req, res, next) {
       console.log(`USER: ${profileName}, ID: ${id}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
 
       // Send the reward message as response
-      res.render('result-detail', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileName, profileAvatar, isCompleted, badgesOfUser });
+      res.render('result-detail', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileId, profileName, profileAvatar, isCompleted, badgesOfUser });
     } else {
       res.send('Đã có lỗi xảy ra khi đọc HTML từ URL.');
     }
