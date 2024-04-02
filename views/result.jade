@@ -23,9 +23,8 @@ html
           span.badge.badge-success= skillBadgeCount
           |  skill badges và 
           span.badge.badge-warning= regularBadgeCount
-          |  regular badges 
-          span.badge.badge-warning= regularBadgeCount
-            a(href="/r" + profileId + "/view")
+          |  regular badges            
+          a(href="/r" + profileId + "/view")
             | (chi tiết)
       div.text-center(style="font-size: 20px; margin: 10px 0;", class=isCompleted ? "text-success" : "text-danger")= rewardMessage
       // Hiển thị hình ảnh
