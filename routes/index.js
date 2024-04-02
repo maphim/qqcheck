@@ -306,7 +306,16 @@ router.get('/r/:id/view', function (req, res, next) {
         image: profileAvatar
       }
 
-      badgesOfUser = badgesOfUser.sort((a, b) => a.status.length - b.status.length)
+      badgesOfUser = badgesOfUser.sort((a, b) => {
+        if (a.time == '-' || b.time == '-') {
+          return a.status.length - b.status.length;
+        }
+
+        const timeA = moment(a.time, "YYYY-MM-DDTHH:mm:ssZ");
+        const timeB = moment(b.time, "YYYY-MM-DDTHH:mm:ssZ");
+
+        return timeB.diff(timeA);
+      })
 
       // Send the reward message as response
       res.render('result-detail', { app, rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileId, profileName, profileAvatar, isCompleted, badgesOfUser });
