@@ -7,8 +7,8 @@ var router = express.Router();
 moment.locale('vi');
 
 let app = {
-  title: '',
-  description: '',
+  title: 'QuanQuanGSP Checker',
+  description: 'QuanQuanGSP Checker',
   image: ''
 }
 
@@ -49,7 +49,7 @@ const regularBadges = [
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'QuanQuanGSP Checker' });
+  res.render('index', { app });
 });
 
 /* Return result */

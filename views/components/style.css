@@ -1,7 +1,23 @@
+
 .font-sans {
     font-family: IBM Plex Sans, sans-serif;
 }
 
 .fs-12 {
     font-size: 12px;
+}
+
+.fs-20 {
+    font-size: 20px;
+}
+
+.fs-28 {
+    font-size: 28px;
+}
+
+@media screen and (min-width: 768px) {
+    .bg-md-google {
+        background-image: url('https://services.google.com/fh/files/events/csj_vn_s6_1600_400_v2.png'); 
+        background-repeat: no-repeat;
+    }
 }

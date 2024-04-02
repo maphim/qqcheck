@@ -1,18 +1,16 @@
 doctype html
 html
-  head
-    title= title
-    meta(charset="utf-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1")
-    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css")
-  body
-    .container.text-center
-      h1 Your profile is public 
-        small (https://www.cloudskillsboost.google/public_profiles/*uuid*)
-      form(action="/result", method="post" class="form-inline" style="margin-bottom: 16px;")
-        .form-group
-          label(for="url" style="margin-right: 8px;") Insert URL here:
-          input(type="text", name="url", id="url" class="form-control" placeholder="Please insert your URL here" style="margin-right: 8px; width: 600px")
-        button(type="submit" class="btn btn-primary" style="margin-left: 8px;") Submit
-      img(src="https://services.google.com/fh/files/events/csj_vn_s6_1600_400_v2.png" class="img-responsive center-block" alt="Hình ảnh")
-        
+  include ./components/head.jade
+  body.bg-md-google
+
+    div.container-md.m-md-5.px-md-5.py-md-1.rounded.mt-5
+    
+      header
+        h1.fs-28 Your profile is public 
+          small.fs-20.text-muted (https://www.cloudskillsboost.google/public_profiles/*uuid*)
+
+      main
+          form.d-flex.flex-row.align-items-center.flex-wrap(action="/result", method="post")
+            label(for="url", class="pr-sm-none pr-md-2 my-1") Insert URL here:
+            input(type="text", name="url", id="url" class="form-control my-1" placeholder="Please insert your URL here" style="margin-right: 8px; width: 600px")
+            button(type="submit" class="btn btn-primary pr-sm-none pr-md-2 my-1") Submit        
