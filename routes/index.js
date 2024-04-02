@@ -75,6 +75,9 @@ router.get('/r/:id', function (req, res, next) {
         return res.redirect('/'); // Redirect to homepage
       }
 
+      const badgesWrong = [];
+      const badgesWrongTime = [];
+
       // Iterate through each profile badge
       $('.profile-badge').each((index, badge) => {
         // Extract badge title text
@@ -91,14 +94,27 @@ router.get('/r/:id', function (req, res, next) {
           const startDate = new Date('2024-03-22');
           const endDate = new Date('2024-04-20');
           if (badgeDate >= startDate && badgeDate <= endDate) {
+
             // Compare badge title with skill badges list
             if (skillBadges.includes(badgeTitle)) {
               skillBadgeCount++;
             }
+
             // Compare badge title with regular badges list
             else if (regularBadges.includes(badgeTitle)) {
               regularBadgeCount++;
+            } else {
+              // Badge 
+              badgesWrong.push({
+                title: badgeTitle,
+                time: badgeDate
+              });
             }
+          } else {
+            badgesWrongTime.push({
+              title: badgeTitle,
+              time: badgeDate
+            });
           }
         }
       });
@@ -132,7 +148,126 @@ router.get('/r/:id', function (req, res, next) {
       console.log(`USER: ${profileName}, ID: ${id}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
 
       // Send the reward message as response
-      res.render('result', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileName, profileAvatar, isCompleted });
+      res.render('result', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileName, profileAvatar, isCompleted, badgesWrong, badgesWrongTime });
+    } else {
+      res.send('Đã có lỗi xảy ra khi đọc HTML từ URL.');
+    }
+  });
+});
+
+/* Return result */
+router.get('/r/:id/view', function (req, res, next) {
+
+  const id = req.params.id;
+  const url = `https://www.cloudskillsboost.google/public_profiles/${id}`;
+
+  request(url, (error, response, html) => {
+    if (!error && response.statusCode == 200) {
+      const $ = cheerio.load(html);
+
+      // Initialize counters for skill badges and regular badges
+      let skillBadgeCount = 0;
+      let regularBadgeCount = 0;
+
+      let profileName = $('.ql-display-small').text().trim();
+      let profileAvatar = $('ql-avatar.profile-avatar').attr('src');
+
+      if (!profileName) {
+        return res.redirect('/'); // Redirect to homepage
+      }
+
+      let badgesOfUser = [];
+
+      // Iterate through each profile badge
+      $('.profile-badge').each((index, badge) => {
+        // Extract badge title text
+        const badgeTitle = $(badge).find('.ql-title-medium').text().trim();
+        // Extract badge date
+        const badgeDateText = $(badge).find('.ql-body-medium').text().trim();
+
+        // Extract date from text
+        const badgeDateMatch = badgeDateText.match(/(\w{3})\s+(\d{1,2}),\s+(\d{4})/);
+        if (badgeDateMatch) {
+          // Convert date components to Date object
+          const badgeDate = new Date(`${badgeDateMatch[3]}-${badgeDateMatch[2]}-${badgeDateMatch[1]}T00:00:00-0400`);
+
+          badgesOfUser.push({
+            title: badgeTitle,
+            time: badgeDate,
+            status: 'OK'
+          });
+
+          // Check if date is within the valid range
+          const startDate = new Date('2024-03-22');
+          const endDate = new Date('2024-04-20');
+          if (badgeDate >= startDate && badgeDate <= endDate) {
+
+            // Compare badge title with skill badges list
+            if (skillBadges.includes(badgeTitle)) {
+              skillBadgeCount++;
+            }
+
+            // Compare badge title with regular badges list
+            else if (regularBadges.includes(badgeTitle)) {
+              regularBadgeCount++;
+            } else {
+              // Badge 
+              badgesOfUser = badgesOfUser.map(badge => {
+                if (badge.title === badgeTitle && badge.time === badgeDate) {
+                  return {
+                    ...badge,
+                    status: 'NOT_IN_SS6'
+                  };
+                } else {
+                  return badge;
+                }
+              });
+            }
+          } else {
+            badgesOfUser = badgesOfUser.map(badge => {
+              if (badge.title === badgeTitle && badge.time === badgeDate) {
+                return {
+                  ...badge,
+                  status: 'TIME_NOT_OK'
+                };
+              } else {
+                return badge;
+              }
+            });
+          }
+        }
+      });
+
+      const totalBadges = skillBadgeCount + regularBadgeCount
+
+      // Determine the reward based on the number of badges earned
+      let rewardMessage = "Bạn cần hoàn thành ít nhất 3 skill badges và 7 regular badges để nhận quà tặng!";
+      let isCompleted = false;
+
+      if (skillBadgeCount >= 3 && totalBadges >= 7) {
+        rewardMessage = "🎊 Bạn đã được quà Tier 1: Gối tựa, ly nước";
+        isCompleted = true;
+      }
+
+      if (skillBadgeCount >= 6 && totalBadges >= 14) {
+        rewardMessage = "🎉 Bạn đã được quà Tier 2: Gối tựa, ly nước, và Áo khoác gió";
+        isCompleted = true;
+      }
+
+      if (skillBadgeCount >= 3 && totalBadges < 7) {
+        rewardMessage = `Bạn đã có ít nhất 3 skill badges. Hãy tiếp tục kiếm thêm regular badges để nhận quà tặng!`;
+        isCompleted = false;
+      }
+
+      if (skillBadgeCount >= 6 && totalBadges < 14) {
+        rewardMessage = "Bạn đã có ít nhất 6 skill badges. Hãy tiếp tục kiếm thêm regular badges để nhận quà tặng!";
+        isCompleted = false;
+      }
+
+      console.log(`USER: ${profileName}, ID: ${id}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
+
+      // Send the reward message as response
+      res.render('result-detail', { rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileName, profileAvatar, isCompleted, badgesOfUser });
     } else {
       res.send('Đã có lỗi xảy ra khi đọc HTML từ URL.');
     }

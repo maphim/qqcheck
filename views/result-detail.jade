@@ -1,0 +1,58 @@
+doctype html
+html
+  head
+    title= profileName + " | Danh sách khóa học của học viên "
+    meta(name="og:type", content= "website")
+    meta(name="og:title", content= profileName)
+    meta(name="og:description", content= profileName + " | Danh sách khóa học của học viên ")
+    meta(name="og:image", content= profileAvatar)
+    // Thêm định dạng cho trang và tệp CSS của Bootstrap 3
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css")
+    link(rel="icon", href=profileAvatar)
+  body
+    // Sử dụng lớp container của Bootstrap để căn giữa nội dung
+    .container
+
+      div.row
+        h1.text-left= profileName
+
+      div.row
+        p Bạn đang có 
+          span.badge.badge-primary= totalBadges
+          |  badges, trong đó 
+          span.badge.badge-success= skillBadgeCount
+          |  skill badges và 
+          span.badge.badge-warning= regularBadgeCount
+          |  regular badges
+
+      div.row
+        div.table-responsive
+          h3
+            | Tất cả các badges của 
+            span.text-danger=profileName
+          table.table
+            thead
+              tr
+                th #
+                th Khóa học
+                th Thời gian hoàn thành
+                th Trạng thái
+            tbody
+                - each badge, i in badgesOfUser
+                  tr
+                    td= i+1
+                    td= badge.title
+                    td= badge.time
+                    td.text-center
+                      case badge.status
+                        when 'NOT_IN_SS6'
+                          span(style="padding: 0 2px;").text-danger.glyphicon.glyphicon-remove-sign
+                          | Không nằm trong SS6
+                        when 'TIME_NOT_OK'
+                          span(style="padding: 0 2px;").text-danger.glyphicon.glyphicon-remove-sign
+                          | Thời gian không hợp lệ
+                        default
+                          span(style="padding: 0 2px;").text-success.glyphicon.glyphicon-ok-sign
+                          | Hợp lệ
