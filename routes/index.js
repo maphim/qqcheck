@@ -83,7 +83,7 @@ router.get('/r/:id', function (req, res, next) {
         const badgeDateText = $(badge).find('.ql-body-medium').text().trim();
 
         // Extract date from text
-        const badgeDateMatch = badgeDateText.match(/(\w{3})\s(\d{1,2}),\s(\d{4})/);
+        const badgeDateMatch = badgeDateText.match(/(\w{3})\s+(\d{1,2}),\s+(\d{4})/);
         if (badgeDateMatch) {
           // Convert date components to Date object
           const badgeDate = new Date(`${badgeDateMatch[3]}-${badgeDateMatch[2]}-${badgeDateMatch[1]}T00:00:00-0400`);
