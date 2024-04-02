@@ -28,15 +28,30 @@ html
                 tr
                   th #
                   th Khóa học
-                  th.text-center Thời gian hoàn thành
-                  th.text-center Trạng thái
+                  th.d-none.d-md-table-cell.text-center Thời gian hoàn thành
+                  th.d-none.d-md-table-cell.text-center Trạng thái
               tbody
                   - each badge, i in badgesOfUser
                     tr
                       td= i+1
                       td= badge.title
-                      td.text-center(title=badge.timeHint)= badge.timeStr
-                      td.text-center
+                        div.text-muted 
+                          span.fs-11.fw-light.px-2.d-inline.d-md-none
+                            i.pr-1.bi.bi-calendar3.text-dark
+                            =badge.timeStr 
+                          span.fs-11.fw-light.px-2.d-inline.d-md-none
+                            case badge.status
+                              when 'NOT_IN_SS6'
+                                i.pr-1.bi.bi-ban.text-danger
+                                | Không nằm trong SS6
+                              when 'TIME_NOT_OK'
+                                i.pr-1.bi.bi-ban.text-danger
+                                | Thời gian không hợp lệ
+                              default
+                                i.pr-1.bi.bi-check-circle-fill.text-success
+                                | Hợp lệ
+                      td.d-none.d-md-table-cell.text-center(title=badge.timeHint)= badge.timeStr 
+                      td.d-none.d-md-table-cell.text-center
                         case badge.status
                           when 'NOT_IN_SS6'
                             i.pr-1.bi.bi-ban.text-danger
