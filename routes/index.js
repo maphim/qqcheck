@@ -25,7 +25,7 @@ const skillBadges = [
   "Manage PostgreSQL Databases on Cloud SQL",
   "Monitor and Manage Google Cloud Resources",
   "Manage Kubernetes in Google Cloud",
-  "Automating Infrastructure on Google Cloud with Terraform"
+  "Build Infrastructure with Terraform on Google Cloud"
 ];
 
 const regularBadges = [
