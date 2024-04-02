@@ -193,7 +193,13 @@ router.get('/r/:id/view', function (req, res, next) {
         return res.redirect('/'); // Redirect to homepage
       }
 
-      let badgesOfUser = [];
+      let badgesOfUser = [...skillBadges, ...regularBadges].map(e => ({
+        title: e,
+        time: '-',
+        timeStr: '-',
+        timeHint: '-',
+        status: 'NOT_COMPLETE',
+      }));
 
       // Iterate through each profile badge
       $('.profile-badge').each((index, badge) => {
@@ -208,17 +214,37 @@ router.get('/r/:id/view', function (req, res, next) {
           // Convert date components to Date object
           const badgeDate = new Date(`${badgeDateMatch[3]}-${badgeDateMatch[2]}-${badgeDateMatch[1]}T00:00:00-0400`);
 
-          badgesOfUser.push({
-            title: badgeTitle,
-            time: badgeDate,
-            timeStr: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").fromNow(),
-            timeHint: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").format('MM/DD/YYYY'),
-            status: 'OK'
+          let badgeExists = false;
+
+          badgesOfUser = badgesOfUser.map(badge => {
+            if (badge.title === badgeTitle) {
+              badgeExists = true;
+              return {
+                ...badge,
+                time: badgeDate,
+                timeStr: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").fromNow(),
+                timeHint: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").format('MM/DD/YYYY'),
+                status: 'OK'
+              };
+            } else {
+              return badge;
+            }
           });
+
+          if (!badgeExists) {
+            badgesOfUser.push({
+              title: badgeTitle,
+              time: badgeDate,
+              timeStr: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").fromNow(),
+              timeHint: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").format('MM/DD/YYYY'),
+              status: 'NOT_IN_SS6'
+            });
+          }
 
           // Check if date is within the valid range
           const startDate = new Date('2024-03-22');
           const endDate = new Date('2024-04-20');
+
           if (badgeDate >= startDate && badgeDate <= endDate) {
 
             // Compare badge title with skill badges list
@@ -229,22 +255,11 @@ router.get('/r/:id/view', function (req, res, next) {
             // Compare badge title with regular badges list
             else if (regularBadges.includes(badgeTitle)) {
               regularBadgeCount++;
-            } else {
-              // Badge 
-              badgesOfUser = badgesOfUser.map(badge => {
-                if (badge.title === badgeTitle && badge.time === badgeDate) {
-                  return {
-                    ...badge,
-                    status: 'NOT_IN_SS6'
-                  };
-                } else {
-                  return badge;
-                }
-              });
             }
+
           } else {
             badgesOfUser = badgesOfUser.map(badge => {
-              if (badge.title === badgeTitle && badge.time === badgeDate) {
+              if (badge.title === badgeTitle) {
                 return {
                   ...badge,
                   status: 'TIME_NOT_OK'
@@ -290,6 +305,8 @@ router.get('/r/:id/view', function (req, res, next) {
         description: `${profileName} | Danh sách khóa học`,
         image: profileAvatar
       }
+
+      badgesOfUser = badgesOfUser.sort((a, b) => a.status.length - b.status.length)
 
       // Send the reward message as response
       res.render('result-detail', { app, rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileId, profileName, profileAvatar, isCompleted, badgesOfUser });

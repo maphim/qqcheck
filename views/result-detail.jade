@@ -5,7 +5,7 @@ html
   body
 
     
-      header.p-3.font-sans.text-center.font-sans
+      header.p-3.font-sans.text-center
         div.container
           div.pt-md-3.pb-md-1
             h1.bd-title.mt-0= profileName
@@ -18,11 +18,12 @@ html
               |  regular badges  
 
       main
-        div.p-2.font-sans
+        div.p-2.font-sans.container
           div.table-responsive
             h3
               | Tất cả các badge của 
               span.text-danger=profileName
+              | trong Season 6
             table.table
               thead
                 tr
@@ -47,6 +48,9 @@ html
                               when 'TIME_NOT_OK'
                                 i.pr-1.bi.bi-ban.text-danger
                                 | Thời gian không hợp lệ
+                              when 'NOT_COMPLETE'
+                                i.pr-1.bi.bi-award.text-dark
+                                | Chưa học
                               default
                                 i.pr-1.bi.bi-check-circle-fill.text-success
                                 | Hợp lệ
@@ -59,6 +63,9 @@ html
                           when 'TIME_NOT_OK'
                             i.pr-1.bi.bi-ban.text-danger
                             | Thời gian không hợp lệ
+                          when 'NOT_COMPLETE'
+                            i.pr-1.bi.bi-award.text-dark
+                            | Chưa học
                           default
                             i.pr-1.bi.bi-check-circle-fill.text-success
                             | Hợp lệ
