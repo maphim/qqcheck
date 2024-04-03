@@ -198,6 +198,7 @@ router.get('/r/:id/view', function (req, res, next) {
         time: '-',
         timeStr: '-',
         timeHint: '-',
+        currentSeason: true,
         status: 'NOT_COMPLETE',
       }));
 
@@ -237,6 +238,7 @@ router.get('/r/:id/view', function (req, res, next) {
               time: badgeDate,
               timeStr: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").fromNow(),
               timeHint: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").format('MM/DD/YYYY'),
+              currentSeason: false,
               status: 'NOT_IN_SS6'
             });
           }
