@@ -4,48 +4,37 @@ const moment = require('moment');
 const request = require('request');
 var router = express.Router();
 
+const csv = require('csv-parser');
+const fs = require('fs');
+
 moment.locale('vi');
+
+// Define lists of skill badges and regular badges
+var baseBadges = [], skillBadges = [], regularBadges = [];
+
+// Load badges from csv;
+fs.createReadStream('./data/gsp-badges.csv').pipe(csv())
+  .on('data', (data) => baseBadges.push(data))
+  .on('end', () => {
+    baseBadges.forEach(badge => {
+      switch (badge.type) {
+        case 'SKILL':
+          skillBadges.push(badge.name);
+          break;
+        case 'REGULAR':
+          regularBadges.push(badge.name);
+          break;
+        default:
+          break;
+      }
+    });
+  });
 
 let app = {
   title: 'QuanQuanGSP Checker',
   description: 'QuanQuanGSP Checker',
   image: ''
 }
-
-// Define lists of skill badges and regular badges
-const skillBadges = [
-  "Get Started with TensorFlow on Google Cloud",
-  "Build LookML Objects in Looker",
-  "Detect Manufacturing Defects using Visual Inspection AI",
-  "Analyze Speech and Language with Google APIs",
-  "Analyze Images with the Cloud Vision API",
-  "Analyze Sentiment with Natural Language API",
-  "Predict Soccer Match Outcomes with BigQuery ML",
-  "Create and Manage AlloyDB Databases",
-  "Manage PostgreSQL Databases on Cloud SQL",
-  "Monitor and Manage Google Cloud Resources",
-  "Manage Kubernetes in Google Cloud",
-  "Build Infrastructure with Terraform on Google Cloud"
-];
-
-const regularBadges = [
-  "Baseline: Data, ML, AI",
-  "Intro to ML: Language Processing",
-  "Intro to ML: Image Processing",
-  "Generative AI Explorer - Vertex AI",
-  "Google Cloud Computing Foundations: Data, ML, and AI in Google Cloud",
-  "Managing Machine Learning Projects with Google Cloud",
-  "Introduction to AI and Machine Learning on Google Cloud",
-  "Applying Machine Learning to your Data with Google Cloud",
-  "Production Machine Learning Systems",
-  "Smart Analytics, Machine Learning, and AI on Google Cloud",
-  "ML Pipelines on Google Cloud",
-  "Baseline: Infrastructure",
-  "Google Cloud Computing Foundations: Infrastructure in Google Cloud - Locales",
-  "Securing your Network with Cloud Armor",
-  "Google Cloud Computing Foundations: Networking & Security in Google Cloud",
-  "Mitigating Security Vulnerabilities on Google Cloud"
-];
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -113,18 +102,8 @@ router.get('/r/:id', function (req, res, next) {
             // Compare badge title with regular badges list
             else if (regularBadges.includes(badgeTitle)) {
               regularBadgeCount++;
-            } else {
-              // Badge 
-              badgesWrong.push({
-                title: badgeTitle,
-                time: badgeDate
-              });
             }
-          } else {
-            badgesWrongTime.push({
-              title: badgeTitle,
-              time: badgeDate
-            });
+            
           }
         }
       });
@@ -164,7 +143,7 @@ router.get('/r/:id', function (req, res, next) {
       }
 
       // Send the reward message as response
-      res.render('result', { app, rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileId, profileName, profileAvatar, isCompleted, badgesWrong, badgesWrongTime });
+      res.render('result', { app, rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileId, profileName, profileAvatar, isCompleted });
     } else {
       res.send('Đã có lỗi xảy ra khi đọc HTML từ URL.');
     }
@@ -174,8 +153,8 @@ router.get('/r/:id', function (req, res, next) {
 /* Return result */
 router.get('/r/:id/view', function (req, res, next) {
 
-  const id = req.params.id;
-  const url = `https://www.cloudskillsboost.google/public_profiles/${id}`;
+  const uuid = req.params.id;
+  const url = `https://www.cloudskillsboost.google/public_profiles/${uuid}`;
 
   request(url, (error, response, html) => {
     if (!error && response.statusCode == 200) {
@@ -184,23 +163,15 @@ router.get('/r/:id/view', function (req, res, next) {
       // Initialize counters for skill badges and regular badges
       let skillBadgeCount = 0;
       let regularBadgeCount = 0;
+      let badgesOfUser = [...baseBadges];
 
       let profileName = $('.ql-display-small').text().trim();
       let profileAvatar = $('ql-avatar.profile-avatar').attr('src');
-      let profileId = id;
+      let profileId = uuid;
 
       if (!profileName) {
         return res.redirect('/'); // Redirect to homepage
       }
-
-      let badgesOfUser = [...skillBadges, ...regularBadges].map(e => ({
-        title: e,
-        time: '-',
-        timeStr: '-',
-        timeHint: '-',
-        currentSeason: true,
-        status: 'NOT_COMPLETE',
-      }));
 
       // Iterate through each profile badge
       $('.profile-badge').each((index, badge) => {
@@ -218,14 +189,14 @@ router.get('/r/:id/view', function (req, res, next) {
           let badgeExists = false;
 
           badgesOfUser = badgesOfUser.map(badge => {
-            if (badge.title === badgeTitle) {
+            if (badge.name === badgeTitle) {
               badgeExists = true;
               return {
                 ...badge,
-                time: badgeDate,
-                timeStr: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").fromNow(),
-                timeHint: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").format('MM/DD/YYYY'),
-                status: 'OK'
+                time_completed: badgeDate,
+                time_completed_str: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").fromNow(),
+                time_completed_hint: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").format('MM/DD/YYYY'),
+                badge_status: 'OK'
               };
             } else {
               return badge;
@@ -234,12 +205,11 @@ router.get('/r/:id/view', function (req, res, next) {
 
           if (!badgeExists) {
             badgesOfUser.push({
-              title: badgeTitle,
-              time: badgeDate,
-              timeStr: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").fromNow(),
-              timeHint: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").format('MM/DD/YYYY'),
-              currentSeason: false,
-              status: 'NOT_IN_SS6'
+              name: badgeTitle,
+              time_completed: badgeDate,
+              time_completed_str: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").fromNow(),
+              time_completed_hint: moment(badgeDate, "YYYY-MM-DDTHH:MM:SSZ").format('MM/DD/YYYY'),
+              badge_status: 'NOT_IN_SS6'
             });
           }
 
@@ -261,10 +231,10 @@ router.get('/r/:id/view', function (req, res, next) {
 
           } else {
             badgesOfUser = badgesOfUser.map(badge => {
-              if (badge.title === badgeTitle) {
+              if (badge.name === badgeTitle) {
                 return {
                   ...badge,
-                  status: 'TIME_NOT_OK'
+                  badge_status: 'TIME_NOT_OK'
                 };
               } else {
                 return badge;
@@ -300,7 +270,7 @@ router.get('/r/:id/view', function (req, res, next) {
         isCompleted = false;
       }
 
-      console.log(`USER: ${profileName}, ID: ${id}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
+      console.log(`USER: ${profileName}, ID: ${uuid}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
 
       app = {
         title: profileName,
@@ -309,18 +279,18 @@ router.get('/r/:id/view', function (req, res, next) {
       }
 
       badgesOfUser = badgesOfUser.sort((a, b) => {
-        if (a.time == '-' || b.time == '-') {
-          return a.status.length - b.status.length;
+        if (a.time_completed == '-' || b.time_completed == '-') {
+          return a.badge_status.length - b.badge_status.length;
         }
 
-        const timeA = moment(a.time, "YYYY-MM-DDTHH:mm:ssZ");
-        const timeB = moment(b.time, "YYYY-MM-DDTHH:mm:ssZ");
+        const timeA = moment(a.time_completed, "YYYY-MM-DDTHH:mm:ssZ");
+        const timeB = moment(b.time_completed, "YYYY-MM-DDTHH:mm:ssZ");
 
         return timeA.diff(timeB);
       })
 
       // Send the reward message as response
-      res.render('result-detail', { app, rewardMessage, skillBadgeCount, regularBadgeCount, totalBadges, profileId, profileName, profileAvatar, isCompleted, badgesOfUser });
+      res.render('result-detail', { app, rewardMessage, skillBadgeCount, regularBadgeCount, badgesOfUser, totalBadges, profileId, profileName, profileAvatar, isCompleted });
     } else {
       res.send('Đã có lỗi xảy ra khi đọc HTML từ URL.');
     }

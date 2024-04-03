@@ -29,22 +29,29 @@ html
                 tr
                   th #
                   th Khóa học
-                  th.d-none.d-md-table-cell.text-center Thời gian hoàn thành
+                  th.d-none.d-md-table-cell.text-center Thời lượng làm bài dự kiến
+                  th.d-none.d-md-table-cell.text-center Nộp bài lúc
                   th.d-none.d-md-table-cell.text-center Trạng thái
               tbody
                   - each badge, i in badgesOfUser
                     tr
                       td= i+1
-                      td= badge.title
-                        if badge.currentSeason
+                      td
+                        
+                        if badge.id
+                          a(href="https://www.cloudskillsboost.google/course_templates/" + badge.id, target="_blank")=badge.name
+                        else
+                          span=badge.name
+
+                        if badge.season
                           span.px-1.text-danger *
                         div.text-muted 
-                          if badge.timeStr != '-'
+                          if badge.time_completed_str != '-'
                             span.fs-12.fw-light.pr-2.d-inline.d-md-none
                               i.pr-1.bi.bi-calendar3.text-dark
-                              =badge.timeStr 
+                              =badge.time_completed_str 
                           span.fs-12.fw-light.pr-2.d-inline.d-md-none
-                            case badge.status
+                            case badge.badge_status
                               when 'NOT_IN_SS6'
                                 i.pr-1.bi.bi-ban.text-danger
                                 | Nằm ngoài SS6
@@ -54,12 +61,16 @@ html
                               when 'NOT_COMPLETE'
                                 i.pr-1.bi.bi-award.text-dark
                                 | Chưa học
-                              default
+                              when 'OK'
                                 i.pr-1.bi.bi-check-circle-fill.text-success
                                 | Hợp lệ
-                      td.d-none.d-md-table-cell.text-center(title=badge.timeHint)= badge.timeStr 
-                      td.d-none.d-md-table-cell.text-center
-                        case badge.status
+                              default
+                                i.pr-1.bi.bi-check-circle-fill.text-dark
+                                =badge.badge_status
+                      td.d-none.d-md-table-cell.text-center.fs-14= badge.duration_complete_str
+                      td.d-none.d-md-table-cell.text-center.fs-14(title=badge.time_completed_hint)= badge.time_completed_str 
+                      td.d-none.d-md-table-cell.text-center.fs-14
+                        case badge.badge_status
                           when 'NOT_IN_SS6'
                             i.pr-1.bi.bi-ban.text-danger
                             | Nằm ngoài SS6
@@ -69,6 +80,9 @@ html
                           when 'NOT_COMPLETE'
                             i.pr-1.bi.bi-award.text-dark
                             | Chưa học
-                          default
+                          when 'OK'
                             i.pr-1.bi.bi-check-circle-fill.text-success
                             | Hợp lệ
+                          default
+                            i.pr-1.bi.bi-check-circle-fill.text-dark
+                            =badge.badge_status
