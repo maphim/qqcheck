@@ -280,12 +280,12 @@ router.get('/r/:id/view', function (req, res, next) {
 
       badgesOfUser = badgesOfUser.sort((a, b) => {
         
-        if (a.time_completed == '-' || b.time_completed == '-') {
-          return a.badge_status.length - b.badge_status.length;
+        if (a.badge_status == 'NOT_COMPLETE' && b.badge_status == 'NOT_COMPLETE') {
+          return b.duration_complete - a.duration_complete;
         }
 
-        if (a.badge_status == 'NOT_COMPLETE' || b.badge_status == 'NOT_COMPLETE') {
-          return b.duration_complete - a.duration_complete;
+        if (a.time_completed == '-' || b.time_completed == '-') {
+          return a.badge_status.length - b.badge_status.length;
         }
 
         const timeA = moment(a.time_completed, "YYYY-MM-DDTHH:mm:ssZ");
