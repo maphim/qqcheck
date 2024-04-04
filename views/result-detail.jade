@@ -14,7 +14,8 @@ html
               span.badge.badge-dark= skillBadgeCount
               |  skill badges và 
               span.badge.badge-dark= regularBadgeCount
-              |  regular badges  
+              |  regular badges
+            p(style="font-size: 20px; margin: 10px 0;", class=isCompleted ? "text-success" : "text-danger")= rewardMessage
 
       main
         div.p-2.font-sans.container
