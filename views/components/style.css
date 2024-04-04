@@ -20,6 +20,10 @@
     font-size: 28px;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 @media screen and (min-width: 768px) {
     .bg-md-google {
         background-image: url('https://services.google.com/fh/files/events/csj_vn_s6_1600_400_v2.png'); 

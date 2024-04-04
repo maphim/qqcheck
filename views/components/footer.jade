@@ -1,0 +1,29 @@
+script.
+    document.addEventListener('DOMContentLoaded', function () {
+
+        document.querySelector('.screenshot').addEventListener('click', function () {
+        html2canvas(document.querySelector("body"), {
+            ignoreElements: function(element) {
+                // Specify the CSS selectors for elements to be ignored
+                return element.matches('.screenshot');
+            }
+        }).then(canvas => {
+
+            // Create a link for downloading the image
+            const downloadLink = document.createElement('a');
+            downloadLink.href = canvas.toDataURL("image/png");
+            downloadLink.download = 'screenshot.png';
+
+            // Optionally, you can trigger the download automatically
+            downloadLink.click();
+
+            // Copy to clipboard
+            canvas.toBlob(function(blob) {
+                navigator.clipboard.write([
+                    new ClipboardItem({ "image/png": blob })
+                ]);
+            });
+        });
+        });
+
+    });

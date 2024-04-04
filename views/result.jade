@@ -6,7 +6,10 @@ html
     .container
       header.p-3.font-sans.text-center
         div.pt-md-3.pb-md-1
-          h1.bd-title.mt-0= profileName
+          .d-inline-flex
+            h1.bd-title.mt-0= profileName
+            span.ml-2.cursor-pointer.align-self-center.font-weight-bolder.text-danger
+              i.bi.bi-camera.screenshot(title="Chia sẻ kết quả")
           p.bd-lead Bạn đang có 
             span.badge.badge-dark= totalBadges
             |  badges hợp lệ, trong đó 
@@ -21,3 +24,5 @@ html
       main.p-3
         div.card
           img(src="https://services.google.com/fh/files/events/csj_vn_s6_swags_rsvp.png" class="card-img" alt="Hình ảnh")
+
+      include ./components/footer.jade

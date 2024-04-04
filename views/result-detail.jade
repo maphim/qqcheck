@@ -1,10 +1,9 @@
 doctype html
 html
   head
-  include ./components/head.jade
+    include ./components/head.jade
   body
 
-    
       header.p-3.font-sans.text-center
         div.container
           div.pt-md-3.pb-md-1
@@ -20,10 +19,13 @@ html
       main
         div.p-2.font-sans.container
           div.table-responsive
-            h3.d-none.d-md-block
-              | Tất cả các badge của 
-              span.text-danger=profileName 
-              |  trong Season 6
+            .d-flex
+              h3.d-none.d-md-inline.flex-grow-1
+                | Tất cả các badge của 
+                span.text-danger=profileName 
+                |  trong Season 6
+              span.cursor-pointer.align-self-center.font-weight-bolder.text-danger
+                i.bi.bi-camera.screenshot(title="Chia sẻ kết quả")
             table.table
               thead
                 tr
@@ -86,3 +88,5 @@ html
                           default
                             i.pr-1.bi.bi-check-circle-fill.text-dark
                             =badge.badge_status
+
+      include ./components/footer.jade
