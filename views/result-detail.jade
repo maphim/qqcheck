@@ -37,7 +37,7 @@ html
                   th.d-none.d-md-table-cell.text-center Trạng thái
               tbody
                   - each badge, i in badgesOfUser
-                    tr(class=badge.season? badge.season : 'non-GSP-SS6')
+                    tr(class=badge.season && badge.badge_status == 'OK' ?  badge.season + ' ' + badge.badge_status : 'non-GSP-SS6')
                       td= i+1
                       td
                         
