@@ -5,7 +5,7 @@ script.
         html2canvas(document.querySelector("body"), {
             ignoreElements: function(element) {
                 // Specify the CSS selectors for elements to be ignored
-                return element.matches('.screenshot');
+                return element.matches('.screenshot, .GSP-SS6');
             }
         }).then(canvas => {
 
