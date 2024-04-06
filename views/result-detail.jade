@@ -7,7 +7,10 @@ html
       header.p-3.font-sans.text-center
         div.container
           div.pt-md-3.pb-md-1
-            h1.bd-title.mt-0= profileName
+            .d-inline-flex
+              h1.bd-title.mt-0= profileName
+              span.ml-2.cursor-pointer.align-self-center.font-weight-bolder.text-danger
+                i.bi.bi-camera.screenshot(title="Chia sẻ kết quả")
             p.bd-lead Bạn đang có 
               span.badge.badge-dark= totalBadges
               |  badges hợp lệ, trong đó 
@@ -25,8 +28,6 @@ html
                 | Tất cả các badge của 
                 span.text-danger=profileName 
                 |  trong Season 6
-              span.cursor-pointer.align-self-center.font-weight-bolder.text-danger
-                i.bi.bi-camera.screenshot(title="Chia sẻ kết quả")
             table.table
               thead
                 tr

@@ -17,12 +17,12 @@ html
             |  skill badges và 
             span.badge.badge-dark= regularBadgeCount
             |  regular badges            
-            a(href="/r/" + profileId + "/view" title="Danh sách khóa học của " + profileName)
+            a(href="/r/" + profileId + "/view" title="Danh sách khóa học của " + profileName, class="profile-detail")
               | (chi tiết)
           p(style="font-size: 20px; margin: 10px 0;", class=isCompleted ? "text-success" : "text-danger")= rewardMessage
 
       main.p-3
         div.card
-          img(src="https://cors-proxy-phi-one.vercel.app/api/hello?url=https://services.google.com/fh/files/events/csj_vn_s6_swags_rsvp.png" class="card-img" alt="Hình ảnh")
+          img(src="/assets/csj_vn_s6_swags_rsvp.png" class="card-img" alt="Hình ảnh")
 
       include ./components/footer.jade
