@@ -48,7 +48,7 @@ html
                           span=badge.name
 
                         if badge.season
-                          span.px-1.text-danger *
+                          small.px-2.text-danger.badge.text-wrap(style="font-size:9px")=badge.type
                         div.text-muted 
                           if badge.time_completed_str != '-'
                             span.fs-12.fw-light.pr-2.d-inline.d-md-none
