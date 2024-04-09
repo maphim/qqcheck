@@ -36,7 +36,7 @@ router.get('/', function (req, res, next) {
     app: {
       title: 'QuanQuanGSP Checker',
       description: 'QuanQuanGSP Checker',
-      image: ''
+      image: 'https://us.v-cdn.net/5021068/uploads/editor/ha/7frj09nru4zu.png'
     }
   });
 });
