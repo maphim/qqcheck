@@ -30,15 +30,15 @@ fs.createReadStream('./data/gsp-badges.csv').pipe(csv())
     });
   });
 
-let app = {
-  title: 'QuanQuanGSP Checker',
-  description: 'QuanQuanGSP Checker',
-  image: ''
-}
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { app });
+  res.render('index', {
+    app: {
+      title: 'QuanQuanGSP Checker',
+      description: 'QuanQuanGSP Checker',
+      image: ''
+    }
+  });
 });
 
 /* Return result */
@@ -103,7 +103,7 @@ router.get('/r/:id', function (req, res, next) {
             else if (regularBadges.includes(badgeTitle)) {
               regularBadgeCount++;
             }
-            
+
           }
         }
       });
@@ -136,7 +136,7 @@ router.get('/r/:id', function (req, res, next) {
 
       console.log(`USER: ${profileName}, ID: ${id}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
 
-      app = {
+      const app = {
         title: profileName,
         description: `${profileName} - ${rewardMessage}`,
         image: profileAvatar
@@ -272,14 +272,14 @@ router.get('/r/:id/view', function (req, res, next) {
 
       console.log(`USER: ${profileName}, ID: ${uuid}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
 
-      app = {
+      const app = {
         title: profileName,
         description: `${profileName} | Danh sách khóa học`,
         image: profileAvatar
       }
 
       badgesOfUser = badgesOfUser.sort((a, b) => {
-        
+
         if (a.badge_status == 'NOT_COMPLETE' && b.badge_status == 'NOT_COMPLETE') {
           return b.duration_complete - a.duration_complete;
         }
