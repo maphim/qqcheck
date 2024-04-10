@@ -33,7 +33,6 @@ html
                 tr
                   th #
                   th Khóa học
-                  th.d-none.d-md-table-cell.text-center Thời lượng làm bài dự kiến
                   th.d-none.d-md-table-cell.text-center Nộp bài lúc
                   th.d-none.d-md-table-cell.text-center Trạng thái
               tbody
@@ -49,6 +48,7 @@ html
 
                         if badge.season
                           small.px-2.text-danger.badge.text-wrap(style="font-size:9px")=badge.type
+
                         div.text-muted 
                           if badge.time_completed_str != '-'
                             span.fs-12.fw-light.pr-2.d-inline.d-md-none
@@ -71,7 +71,12 @@ html
                               default
                                 i.pr-1.bi.bi-check-circle-fill.text-dark
                                 =badge.badge_status
-                      td.d-none.d-md-table-cell.text-center.fs-14= badge.duration_complete_str
+                          
+                        if badge.duration_complete_str
+                          div.d-none.d-md-block.fs-14.text-dark.pt-1
+                            i.pr-1.bi.bi-clock-history
+                            span=badge.duration_complete_str
+
                       td.d-none.d-md-table-cell.text-center.fs-14(title=badge.time_completed_hint)= badge.time_completed_str 
                       td.d-none.d-md-table-cell.text-center.fs-14
                         case badge.badge_status
