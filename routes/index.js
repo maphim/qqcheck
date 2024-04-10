@@ -130,8 +130,8 @@ router.get('/r/:id', function (req, res, next) {
       }
 
       if (skillBadgeCount >= 6 && totalBadges < 14) {
-        rewardMessage = "Bạn đã có ít nhất 6 skill badges. Hãy tiếp tục kiếm thêm regular badges để nhận quà tặng!";
-        isCompleted = false;
+        rewardMessage = "😱 Bạn đã có quà Tier 1. Hãy tiếp tục kiếm thêm regular badges để nhận quà Tier 2!";
+        isCompleted = true;
       }
 
       console.log(`USER: ${profileName}, ID: ${id}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
@@ -266,8 +266,8 @@ router.get('/r/:id/view', function (req, res, next) {
       }
 
       if (skillBadgeCount >= 6 && totalBadges < 14) {
-        rewardMessage = "Bạn đã có ít nhất 6 skill badges. Hãy tiếp tục kiếm thêm regular badges để nhận quà tặng!";
-        isCompleted = false;
+        rewardMessage = "😱 Bạn đã có quà Tier 1. Hãy tiếp tục kiếm thêm regular badges để nhận quà Tier 2!";
+        isCompleted = true;
       }
 
       console.log(`USER: ${profileName}, ID: ${uuid}, SKILL BADGES: ${skillBadgeCount}, REGULAR BADGES: ${regularBadgeCount}, TOTAL BADGES: ${totalBadges}`);
