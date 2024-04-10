@@ -4,7 +4,7 @@ html
     include ./components/head.jade
   body
 
-      header.p-3.font-sans.text-center
+      header.p-3.font-sans.text-center.text-white.bg-dark
         div.container
           div.pt-md-3.pb-md-1
             .d-inline-flex
@@ -12,23 +12,23 @@ html
               span.ml-2.cursor-pointer.align-self-center.font-weight-bolder.text-danger
                 i.bi.bi-camera.screenshot(title="Chia sẻ kết quả")
             p.bd-lead Bạn đang có 
-              span.badge.badge-dark= totalBadges
+              span.badge.badge-light= totalBadges
               |  badges hợp lệ, trong đó 
-              span.badge.badge-dark= skillBadgeCount
+              span.badge.badge-light= skillBadgeCount
               |  skill badges và 
-              span.badge.badge-dark= regularBadgeCount
+              span.badge.badge-light= regularBadgeCount
               |  regular badges
             p(style="font-size: 20px; margin: 10px 0;", class=isCompleted ? "text-success" : "text-danger")= rewardMessage
 
       main
-        div.p-2.font-sans.container
+        div.px-2.font-sans.container
           div.table-responsive
 
-            .d-flex
-              h3.d-none.d-md-inline.flex-grow-1
-                | Tất cả các badge của 
-                span.text-danger=profileName 
-                |  trong Season 6
+            //- .d-flex
+            //-   h3.d-none.d-md-inline.flex-grow-1
+            //-     | Tất cả các badge của 
+            //-     span.text-danger=profileName 
+            //-     |  trong Season 6
 
             .d-none.d-md-flex.mb-3
                 div.w-50
