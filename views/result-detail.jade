@@ -23,11 +23,25 @@ html
       main
         div.p-2.font-sans.container
           div.table-responsive
+
             .d-flex
               h3.d-none.d-md-inline.flex-grow-1
                 | Tất cả các badge của 
                 span.text-danger=profileName 
                 |  trong Season 6
+
+            .d-none.d-md-flex.mb-3
+                div.w-50
+                  span.fs-12="Tier 1"
+                  .progress.my-1.mx-2
+                    .progress-bar.bg-success(style="width: " + (skillBadgeCount / 3 * 100) + "%")=Math.ceil(skillBadgeCount / 3 * 100) + "% skill"
+                    .progress-bar.bg-dark(style="width: " + (regularBadgeCount / 4 * 100) + "%")=Math.ceil(regularBadgeCount / 4 * 100) + "% regular"
+                div.w-50
+                  span.fs-12="Tier 2"
+                  .progress.my-1.mx-2
+                    .progress-bar.bg-success(style="width: " + (skillBadgeCount / 6 * 100) + "%")=Math.ceil(skillBadgeCount / 6 * 100) + "% skill"
+                    .progress-bar.bg-dark(style="width: " + (regularBadgeCount / 8 * 100) + "%")=Math.ceil(regularBadgeCount / 8 * 100) + "% regular"
+
             table.table
               thead
                 tr
