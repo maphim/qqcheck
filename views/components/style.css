@@ -11,7 +11,6 @@
     font-size: 14px;
 }
 
-
 .fs-20 {
     font-size: 20px;
 }
@@ -24,9 +23,30 @@
     cursor: pointer;
 }
 
+.bg-header {
+    background-image:url('https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-goog/carousel_slides/gdev-eccosystems-bevy-homepage-background_NkWTIS3.png'); 
+    background-size: cover; 
+    background-position: center center;
+    min-height: 280px;
+}
+
+@media screen and (max-width: 768px) {
+    .text-header {
+        color: #202124 !important;
+    }
+    .text-header h1{
+        font-size: 28px;
+        font-weight: 500;
+        margin-top: 38px !important;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .bg-md-google {
         background-image: url('https://services.google.com/fh/files/events/csj_vn_s6_1600_400_v2.png'); 
         background-repeat: no-repeat;
+    }
+    .text-header {
+        color: #202124 !important;
     }
 }

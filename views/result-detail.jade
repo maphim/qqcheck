@@ -3,46 +3,27 @@ html
   head
     include ./components/head.jade
   body
-
-      header.p-3.font-sans.text-center.text-white.bg-dark
+           
+      header.p-3.font-sans.text-center.bg-header.text-header
       
-        div.container.tier-status
-          .d-none.d-md-flex.mb-3
-            div.w-50
-              div.text-left.fs-12="Tier 1"
-              .progress.my-1.mx-2
-                .progress-bar.bg-success(style="width: " + (skillBadgeCount / 3 * 100) + "%")=Math.ceil(skillBadgeCount / 3 * 100) + "% skill"
-                .progress-bar.bg-light.text-dark(style="width: " + (regularBadgeCount / 4 * 100) + "%")=Math.ceil(regularBadgeCount / 4 * 100) + "% regular"
-            div.w-50
-              div.text-left.fs-12="Tier 2"
-              .progress.my-1.mx-2
-                .progress-bar.bg-success(style="width: " + (skillBadgeCount / 6 * 100) + "%")=Math.ceil(skillBadgeCount / 6 * 100) + "% skill"
-                .progress-bar.bg-light.text-dark(style="width: " + (regularBadgeCount / 8 * 100) + "%")=Math.ceil(regularBadgeCount / 8 * 100) + "% regular"
-
         div.container
-          div.pt-md-3.pb-md-1
+          div.pt-md-5.pb-md-1
             .d-inline-flex
               h1.bd-title.mt-0= profileName
               span.ml-2.cursor-pointer.align-self-center.font-weight-bolder.text-danger
                 i.bi.bi-camera.screenshot(title="Chia sẻ kết quả")
             p.bd-lead Bạn đang có 
-              span.badge.badge-light= totalBadges
+              span.badge.badge-dark= totalBadges
               |  badges hợp lệ, trong đó 
-              span.badge.badge-light= skillBadgeCount
+              span.badge.badge-dark= skillBadgeCount
               |  skill badges và 
-              span.badge.badge-light= regularBadgeCount
+              span.badge.badge-dark= regularBadgeCount
               |  regular badges
             p(style="font-size: 20px; margin: 10px 0;", class=isCompleted ? "text-success" : "text-danger")= rewardMessage
 
       main
         div.px-2.font-sans.container
           div.table-responsive
-
-            //- .d-flex
-            //-   h3.d-none.d-md-inline.flex-grow-1
-            //-     | Tất cả các badge của 
-            //-     span.text-danger=profileName 
-            //-     |  trong Season 6
 
             table.table
               thead
