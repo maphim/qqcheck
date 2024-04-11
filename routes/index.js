@@ -6,8 +6,8 @@ router.get('/', function (req, res, next) {
   res.render('index', {
     app: {
       title: 'QuanQuanGSP Checker',
-      description: 'QuanQuanGSP Checker',
-      image: 'https://us.v-cdn.net/5021068/uploads/editor/ha/7frj09nru4zu.png'
+      description: 'Google Cloud Skills Boost badge on your Google Developer profile',
+      image: 'https://th.bing.com/th/id/R.789abf9bb9a30856c94e240a9f8ea2d1?rik=TwCxzFVDeUMUZA&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fgoogle-developers-logo-png-event-details-2729.png&ehk=4VHK8xnI7XD9KVs0PWP3ic8GXHL9fY4%2bGFAvPbBiDmQ%3d&risl=&pid=ImgRaw&r=0'
     }
   });
 });
