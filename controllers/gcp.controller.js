@@ -101,7 +101,7 @@ class GCPController {
             const totalBadges = skillBadgeCount + regularBadgeCount
 
             // Determine the reward based on the number of badges earned
-            let rewardMessage = "Bạn cần hoàn thành ít nhất 3 skill badges và 7 regular badges để nhận quà tặng!";
+            let rewardMessage = "Bạn cần hoàn thành ít nhất 3 skill badges và 4 regular badges để nhận quà tặng!";
             let isCompleted = false;
 
             if (skillBadgeCount >= 3 && totalBadges >= 7) {
@@ -115,7 +115,7 @@ class GCPController {
             }
 
             if (skillBadgeCount >= 3 && totalBadges < 7) {
-                rewardMessage = `Bạn đã có ít nhất 3 skill badges. Hãy tiếp tục kiếm thêm regular badges để nhận quà tặng!`;
+                rewardMessage = `Bạn đã có ít nhất 3 skill badges. Hãy tiếp tục kiếm thêm regular badges để nhận quà Tier 1!`;
                 isCompleted = false;
             }
 
