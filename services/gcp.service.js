@@ -10,7 +10,7 @@ class GCPService {
     }
 
     loadCSV() {
-        fs.createReadStream('./data/gsp-badges.csv').pipe(csv())
+        fs.createReadStream('./data/gcp-badges.csv').pipe(csv())
             .on('data', (data) => this.baseBadges.push(data))
             .on('end', () => {
                 this.baseBadges.forEach(badge => {

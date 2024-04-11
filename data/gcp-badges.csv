@@ -1,0 +1,29 @@
+name,id,duration_complete,duration_complete_str,type,season,time_completed,time_completed_hint,time_completed_str,badge_status
+Get Started with TensorFlow on Google Cloud,646,435,7 hours 15 minutes,SKILL,GCP-SS6,-,-,-,NOT_COMPLETE
+Build LookML Objects in Looker,639,315,5 hours 15 minutes,SKILL,GCP-SS6,-,-,-,NOT_COMPLETE
+Detect Manufacturing Defects using Visual Inspection AI,644,435,7 hours 15 minutes,SKILL,GCP-SS6,-,-,-,NOT_COMPLETE
+Analyze Speech and Language with Google APIs,634,165,2 hours 45 minutes,SKILL,GCP-SS6,-,-,-,NOT_COMPLETE
+Analyze Images with the Cloud Vision API,633,180,3 hours,SKILL,GCP-SS6,-,-,-,NOT_COMPLETE
+Analyze Sentiment with Natural Language API,667,180,3 hours,SKILL,GCP-SS6,-,-,-,NOT_COMPLETE
+Predict Soccer Match Outcomes with BigQuery ML,656,285,4 hours 45 minutes,SKILL,GCP-SS6,-,-,-,NOT_COMPLETE
+Create and Manage AlloyDB Databases,642,570,9 hours 30 minutes,SKILL,GCP-SS6,-,-,-,NOT_COMPLETE
+Manage PostgreSQL Databases on Cloud SQL,652,270,4 hours 30 minutes,SKILL,GCP-SS6,-,-,-,NOT_COMPLETE
+Monitor and Manage Google Cloud Resources,653,180,3 hours,SKILL,GCP-SS6,-,-,-,NOT_COMPLETE
+Manage Kubernetes in Google Cloud,783,300,5 hours,SKILL,GCP-SS6,-,-,-,NOT_COMPLETE
+Build Infrastructure with Terraform on Google Cloud,636,315,5 hours 15 minutes,SKILL,GCP-SS6,-,-,-,NOT_COMPLETE
+"Baseline: Data, ML, AI",619,300,5 hours,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+Intro to ML: Language Processing,740,195,3 hours 15 minutes,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+Intro to ML: Image Processing,739,240,4 hours,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+Generative AI Explorer - Vertex AI,723,255,4 hours 15 minutes,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+"Google Cloud Computing Foundations: Data, ML, and AI in Google Cloud",156,480,8 hours,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+Managing Machine Learning Projects with Google Cloud,157,1440,24 hours,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+Introduction to AI and Machine Learning on Google Cloud,593,960,16 hours,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+Applying Machine Learning to your Data with Google Cloud,23,960,16 hours,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+Production Machine Learning Systems,17,960,16 hours,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+"Smart Analytics, Machine Learning, and AI on Google Cloud",55,420,7 hours,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+ML Pipelines on Google Cloud,191,795,13 hours 15 minutes,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+Baseline: Infrastructure,620,180,3 hours,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+Google Cloud Computing Foundations: Infrastructure in Google Cloud - Locales,182,960,16 hours,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+Securing your Network with Cloud Armor,785,345,5 hours 45 minutes,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+Google Cloud Computing Foundations: Networking & Security in Google Cloud,155,480,8 hours,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
+Mitigating Security Vulnerabilities on Google Cloud,88,300,5 hours,REGULAR,GCP-SS6,-,-,-,NOT_COMPLETE
