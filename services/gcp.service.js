@@ -3,7 +3,7 @@ const request = require('request');
 const cheerio = require('cheerio');
 const csv = require('csv-parser');
 
-class GSPService {
+class GCPService {
 
     constructor() {
         this.baseBadges = [], this.skillBadges = [], this.regularBadges = [];
@@ -41,4 +41,4 @@ class GSPService {
 
 }
 
-module.exports = new GSPService();
+module.exports = new GCPService();
