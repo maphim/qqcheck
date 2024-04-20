@@ -68,8 +68,8 @@ class GCPController {
                     }
 
                     // Check if date is within the valid range
-                    const startDate = new Date('2024-03-22');
-                    const endDate = new Date('2024-04-20');
+                    const startDate = new Date('2024-03-22T00:00:00');
+                    const endDate = new Date('2024-04-20T23:59:59');
 
                     if (badgeDate >= startDate && badgeDate <= endDate) {
 
