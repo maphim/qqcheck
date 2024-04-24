@@ -1,3 +1,10 @@
+package main
+
+import (
+	"net/http"
+	"os"
+)
+
 port := os.Getenv("PORT")
 if port == "" {
     port = "8080"
